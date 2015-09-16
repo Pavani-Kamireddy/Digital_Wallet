@@ -2,6 +2,10 @@ public class DigitalWallet {
   
   String name;
   static double bal_in_wallet=0.0;
+  static int sno=0;
+  Transaction[] array;
+  static ArrayList<Transaction> result=new ArrayList<Transaction>();
+  static ArrayList<Transaction> result1=new ArrayList<Transaction>();
   /* Store all the Add Money, Pay and Reward transactions as transaction objects */
 
   /* implement all the methods given below */
@@ -13,6 +17,8 @@ public class DigitalWallet {
 
   /* Add money to the wallet */
   public boolean addMoney(Transaction tx) { 
+    result.add(tx);
+    sno++;
     if(tx.getAmount()<0||tx.getAmount()>5000) {
       return false;
     }
@@ -30,6 +36,8 @@ public class DigitalWallet {
 
   /* Make a payment */
   public boolean pay(Transaction tx) { 
+    result.add(tx);
+    sno++;
     if(getBalance()<tx.getAmount())
       return false; 
     else {
@@ -49,9 +57,34 @@ public class DigitalWallet {
   public Transaction[] getRewardTransactions() {return null;}
 
   /* Return all the transactions */
-  public Transaction[] getAllTransactions() {return null;}
+  public Transaction[] getAllTransactions() {
+   array=new Transaction[sno];
+    for(int i=0;i<array.length;i++) {
+      array[i]=new Transaction();
+    }
+    for(int i=0;i<array.length;i++) {
+      array[i]=result.get(i);
+    }
+    return array;
+  }
 
   /* Return the transactions that match the merchant name */
-  public Transaction[] getTransactions(String merchantName) {return null;}
+  public Transaction[] getTransactions(String merchantName) {
+    int j=0;
+    for(int i=0;i<array.length;i++) {
+      if(result.get(i).merchant.equals(merchantName)) {
+        result1.add(result.get(i));
+        j++;
+      }
+    }
+    Transaction[] array1=new Transaction[j];
+    for(int i=0;i<array1.length;i++) {
+      array1[i]=new Transaction();
+    }
+    for(int i=0;i<array1.length;i++) {
+      array1[i]=result1.get(i);
+    }
+    return array1;
+  }
 
 }

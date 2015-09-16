@@ -1,6 +1,18 @@
-
 import java.util.Date;
- 
+/*
+ *
+ * A digital wallet is a software application that allows
+ * an individual to make online payments.
+ * 
+ * A user can do the following:
+ *  - create a new digital wallet
+ *  - add money to their wallet
+ *  - check balance in wallet
+ *  - pay a merchant from their wallet
+ *  - earn Rs. 10 for every Rs. 100 spent from the wallet
+ *  - see the statement of all the transactions
+ *
+ */
 
 public class DigitalWalletTest {
   public static void main(String[] args) {
@@ -36,14 +48,12 @@ public class DigitalWalletTest {
       System.out.println("Transaction Declined");
       System.out.println("Testcase Failed!");
     }
-
     /*
      *  Check the balance in wallet
      */
     availableBalance = wallet.getBalance();
     System.out.println("You have " + availableBalance + "in your wallet");
     System.out.println("Expected: 1000 - Actual: " + availableBalance);
-
     /*
      *  Pay a merchant from wallet
      *  Don't approve transaction if balance is less than amount
@@ -65,7 +75,6 @@ public class DigitalWalletTest {
       System.out.println("Transaction Declined");
       System.out.println("Testcase Failed!");
     }
-
     /*
      *  Check the balance in wallet
      *  Prev balance = 1000
@@ -75,7 +84,6 @@ public class DigitalWalletTest {
     availableBalance = wallet.getBalance();
     System.out.println("You have " + availableBalance + "in your wallet");
     System.out.println("Expected: 585 - Actual: " + availableBalance);
-
     /*
      *  Pay a merchant from wallet
      *  Don't approve transaction if balance is less than amount
@@ -96,7 +104,6 @@ public class DigitalWalletTest {
       System.out.println("Transaction Declined");
       System.out.println("Testcase Failed!");
     }
-
     /*
      *  Check the balance in wallet
      *  Prev balance = 585
@@ -106,7 +113,6 @@ public class DigitalWalletTest {
     availableBalance = wallet.getBalance();
     System.out.println("You have " + availableBalance + "in your wallet");
     System.out.println("Expected: 324.50 - Actual: " + availableBalance);
-
     /*
      *  Pay a merchant from wallet
      *  Don't approve transaction if balance is less than amount
@@ -127,7 +133,6 @@ public class DigitalWalletTest {
       System.out.println("Transaction Declined");
       System.out.println("Testcase Passed!");
     }
-
     /*
      *  Check the balance in wallet
      *  Prev balance = 585
@@ -137,7 +142,6 @@ public class DigitalWalletTest {
     availableBalance = wallet.getBalance();
     System.out.println("You have " + availableBalance + "in your wallet");
     System.out.println("Expected: 324.50 - Actual: " + availableBalance);
-
     /* 
      * Add money to wallet
      * Cannot add less than 0 or more than 5000
@@ -150,7 +154,6 @@ public class DigitalWalletTest {
     tx.setDescription("First deposit");
     tx.setMerchant("NA");
     wallet.addMoney(tx);
-
     /*
      *  Check the balance in wallet
      *  Prev balance = 324.50
@@ -159,7 +162,6 @@ public class DigitalWalletTest {
     availableBalance = wallet.getBalance();
     System.out.println("You have " + availableBalance + "in your wallet");
     System.out.println("Expected: 824.50 - Actual: " + availableBalance);
-
     /*
      *  Pay a merchant from wallet
      *  Don't approve transaction if balance is less than amount
@@ -180,7 +182,6 @@ public class DigitalWalletTest {
       System.out.println("Transaction Declined");
       System.out.println("Testcase Failed!");
     }
-
     /*
      *  Check the balance in wallet
      *  Prev balance = 824.50
@@ -190,7 +191,6 @@ public class DigitalWalletTest {
     availableBalance = wallet.getBalance();
     System.out.println("You have " + availableBalance + "in your wallet");
     System.out.println("Expected: 204.50 - Actual: " + availableBalance);
-
     /*
      *  Pay a merchant from wallet
      *  Don't approve transaction if balance is less than amount
@@ -211,7 +211,6 @@ public class DigitalWalletTest {
       System.out.println("Transaction Declined");
       System.out.println("Testcase Failed!");
     }
-
     /*
      *  Check the balance in wallet
      *  Prev balance = 204.50
@@ -221,19 +220,30 @@ public class DigitalWalletTest {
     availableBalance = wallet.getBalance();
     System.out.println("You have " + availableBalance + "in your wallet");
     System.out.println("Expected: 94 - Actual: " + availableBalance);
-
     /*
      * Expected Output: Print it for your convenience. Not graded.
      */
-    wallet.printStatement();
-
-    /* Return the transactions for a given merchant */
-    Transaction[] txs = wallet.getTransactions("Uber");
-    /* Expected output - 2 Uber trasactions objects should be array */
-
+    //wallet.printStatement();
     /* Return all the transactions */
-    txs = wallet.getAllTransactions();
+    Transaction[] txs = wallet.getAllTransactions();
+    for(int i=0;i<txs.length;i++) {
+        System.out.println(txs[i].type+" "+txs[i].merchant+" "+txs[i].amount);
+    }
     /* Expected 10 objects of the type transaction */
 
+    /* Return the transactions for a given merchant */
+    /* Expected output - 2 Uber trasactions objects should be array */
+    
+    System.out.println();
+    txs = wallet.getTransactions("Uber");
+    for(int i=0;i<txs.length;i++) {
+        System.out.println(txs[i].type+" "+txs[i].merchant+" "+txs[i].amount);
+    }
+
+    System.out.println();
+    txs=wallet.getRewardTransactions();
+    for(int i=0;i<txs.length;i++) {
+        System.out.println(txs[i].type+" "+txs[i].merchant+" "+txs[i].amount);
+    }
   }
 }

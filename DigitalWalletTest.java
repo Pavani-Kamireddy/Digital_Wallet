@@ -1,19 +1,6 @@
 
 import java.util.Date;
-/*
- *
- * A digital wallet is a software application that allows
- * an individual to make online payments.
- * 
- * A user can do the following:
- *  - create a new digital wallet
- *  - add money to their wallet
- *  - check balance in wallet
- *  - pay a merchant from their wallet
- *  - earn Rs. 10 for every Rs. 100 spent from the wallet
- *  - see the statement of all the transactions
- *
- */
+ 
 
 public class DigitalWalletTest {
   public static void main(String[] args) {

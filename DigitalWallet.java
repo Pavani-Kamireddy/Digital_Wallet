@@ -1,11 +1,13 @@
+import java.util.*;
+
 public class DigitalWallet {
-  
   String name;
   static double bal_in_wallet=0.0;
   static int sno=0;
   Transaction[] array;
   static ArrayList<Transaction> result=new ArrayList<Transaction>();
   static ArrayList<Transaction> result1=new ArrayList<Transaction>();
+  static ArrayList<Transaction> result2=new ArrayList<Transaction>();
   /* Store all the Add Money, Pay and Reward transactions as transaction objects */
 
   /* implement all the methods given below */
@@ -25,13 +27,13 @@ public class DigitalWallet {
     else { 
       bal_in_wallet=bal_in_wallet+tx.getAmount();
       return true;
-    }
-  }
 
+    }
+    
+  }
   /* Return the balance in the wallet */
   public double getBalance() {
-    return return bal_in_wallet;;
-    
+    return bal_in_wallet;
   }
 
   /* Make a payment */
@@ -51,14 +53,35 @@ public class DigitalWallet {
   }
 
   /* print statement */
-  public void printStatement() {}
+  public void printStatement() {
+    System.out.println();
+    for(int i=0;i<result.size();i++) {
+      System.out.println(result.get(i).type+" "+result.get(i).merchant+" "+result.get(i).amount);
+    }
+  }
 
   /* Return the list of reward transactions */
-  public Transaction[] getRewardTransactions() {return null;}
+  public Transaction[] getRewardTransactions() {
+    int j=0;
+    for(int i=0;i<array.length;i++) {
+      if(result.get(i).type.equals("Payment")) {
+        result2.add(result.get(i));
+        j++;
+      }
+    }
+    Transaction[] array2=new Transaction[j];
+    for(int i=0;i<array2.length;i++) {
+      array2[i]=new Transaction();
+    }
+    for(int i=0;i<array2.length;i++) {
+      array2[i]=result2.get(i);
+    }
+    return array2;
+  }
 
   /* Return all the transactions */
   public Transaction[] getAllTransactions() {
-   array=new Transaction[sno];
+    array=new Transaction[sno];
     for(int i=0;i<array.length;i++) {
       array[i]=new Transaction();
     }
